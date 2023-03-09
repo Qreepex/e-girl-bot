@@ -1,0 +1,26 @@
+{
+  "name": "e-girl-bot",
+  "version": "1.0.0",
+  "description": "👉👈 E Girl Bot uwu",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "tsc && node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Qreepex/e-girl-bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Qreepex/e-girl-bot/issues"
+  },
+  "homepage": "https://github.com/Qreepex/e-girl-bot#readme",
+  "dependencies": {
+    "@discordjs/rest": "^0.2.0-canary.0",
+    "discord-api-types": "^0.37.35",
+    "eris": "^0.17.2",
+    "mongoose": "^7.0.1",
+    "typescript": "^4.9.5"
+  }
+}
