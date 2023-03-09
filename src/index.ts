@@ -44,7 +44,9 @@ bot.on("interactionCreate", async (interaction: CommandInteraction) => {
         const data = await db.startLovingYou(user!.id);
 
         if (data) {
-          return await interaction.createMessage({ content: "You will now receive a message every hour!" });
+          return await interaction.createMessage({
+            content: "You will now receive a message about how much I love you every hour!",
+          });
         } else {
           return await interaction.createMessage({ content: "Something went wrong." });
         }
@@ -77,7 +79,7 @@ async function sendMessages() {
 
     let randomMessage = messages.love_you[Math.floor(Math.random() * messages.love_you.length)];
 
-    const message = randomMessage.replace("{pet}", user.pet_name + " " || "");
+    let message = randomMessage.replace("{pet}", user.pet_name + " " || "");
 
     const dmMessage = await channel.createMessage({ content: message }).catch(() => {});
     if (!dmMessage) {
