@@ -25,8 +25,6 @@ bot.on("ready", async () => {
 });
 
 bot.on("interactionCreate", async (interaction: CommandInteraction) => {
-  console.log(interaction);
-
   if (interaction.type === 2) {
     if (interaction.data) {
       const user = interaction.user || interaction.member?.user;
