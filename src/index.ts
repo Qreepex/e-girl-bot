@@ -61,7 +61,7 @@ bot.on("interactionCreate", async (interaction: CommandInteraction) => {
           return await interaction.createMessage({ content: "You must provide a pet name." });
         }
 
-        await db.setPetName(interaction.user!.id, name);
+        await db.setPetName(user!.id, name);
 
         return await interaction.createMessage({ content: "Your pet name has been set to " + name + "." });
       }
