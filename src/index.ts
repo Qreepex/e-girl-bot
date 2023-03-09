@@ -79,7 +79,19 @@ async function sendMessages() {
 
     let randomMessage = messages.love_you[Math.floor(Math.random() * messages.love_you.length)];
 
-    let message = randomMessage.replace("{pet}", user.pet_name ? user.pet_name + " " : "");
+    let message = randomMessage
+      .replace(
+        "{pet}",
+        user.pet_name && user.pet_name !== "null" && user.pet_name !== null && typeof user.pet_name === "string"
+          ? user.pet_name + " "
+          : ""
+      )
+      .replace(
+        "{pet}",
+        user.pet_name && user.pet_name !== "null" && user.pet_name !== null && typeof user.pet_name === "string"
+          ? user.pet_name + " "
+          : ""
+      );
 
     const dmMessage = await channel.createMessage({ content: message }).catch(() => {});
     if (!dmMessage) {
