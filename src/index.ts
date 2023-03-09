@@ -25,10 +25,16 @@ bot.on("ready", async () => {
 });
 
 bot.on("interactionCreate", async (interaction: CommandInteraction) => {
+  console.log(interaction);
+
   if (interaction.type === 2) {
     if (interaction.data) {
+      const user = interaction.user || interaction.member?.user;
+      if (!user) {
+        return await interaction.createMessage({ content: "Something went wrong." });
+      }
       if (interaction.data.name === "love-you") {
-        const dmChannel = await bot.getDMChannel(interaction.user!.id).catch(() => null);
+        const dmChannel = await bot.getDMChannel(user!.id).catch(() => null);
 
         if (!dmChannel) {
           return await interaction.createMessage({
@@ -37,7 +43,7 @@ bot.on("interactionCreate", async (interaction: CommandInteraction) => {
           });
         }
 
-        const data = await db.startLovingYou(interaction.user!.id);
+        const data = await db.startLovingYou(user!.id);
 
         if (data) {
           return await interaction.createMessage({ content: "You will now receive a message every hour!" });
@@ -45,7 +51,7 @@ bot.on("interactionCreate", async (interaction: CommandInteraction) => {
           return await interaction.createMessage({ content: "Something went wrong." });
         }
       } else if (interaction.data.name === "stop") {
-        await db.stopLovingYou(interaction.user!.id);
+        await db.stopLovingYou(user!.id);
 
         return await interaction.createMessage({ content: "You will no longer receive messages." });
       } else if (interaction.data.name === "pet") {
