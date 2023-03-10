@@ -16,7 +16,7 @@ const db = new Database(config.mongo);
   await bot.connect();
 })();
 
-bot.on("ready", async () => {
+bot.once("ready", async () => {
   console.log("Ready!");
 
   await bot.editStatus("online", { name: "/love-you | qrpx.link/egirl", type: 2 });
@@ -79,19 +79,14 @@ async function sendMessages() {
 
     let randomMessage = messages.love_you[Math.floor(Math.random() * messages.love_you.length)];
 
-    let message = randomMessage
-      .replace(
-        "{pet}",
-        user.pet_name && user.pet_name !== "null" && user.pet_name !== null && typeof user.pet_name === "string"
-          ? user.pet_name + " "
-          : ""
-      )
-      .replace(
-        "{pet}",
-        user.pet_name && user.pet_name !== "null" && user.pet_name !== null && typeof user.pet_name === "string"
-          ? user.pet_name + " "
-          : ""
-      );
+    let message = randomMessage.replace(
+      /{pet}/gm,
+      user.pet_name && user.pet_name !== "null" && user.pet_name !== null && typeof user.pet_name === "string"
+        ? user.pet_name + " "
+        : ""
+    );
+
+    if (message.endsWith(" .")) message = message.substring(0, message.length - 2) + ".";
 
     const dmMessage = await channel.createMessage({ content: message }).catch(() => {});
     if (!dmMessage) {
